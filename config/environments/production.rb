@@ -27,7 +27,7 @@ Feedbin::Application.configure do
   config.assets.js_compressor = :uglifier
 
   # Whether to fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -71,7 +71,7 @@ Feedbin::Application.configure do
   config.cache_store = :dalli_store, ENV['MEMCACHED_HOSTS'].split(',')
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = ENV['ASSET_HOST']
+  #config.action_controller.asset_host = ENV['ASSET_HOST']
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
