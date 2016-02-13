@@ -14,14 +14,12 @@ RUN \
     cd feedbin ;\
     gem install bundler redis
 
-ADD config/database.yml /opt/feedbin/config/database.yml
-
 RUN \
     cd /opt/feedbin ;\
     bundle
 
+ADD config/database.yml /opt/feedbin/config/database.yml
 ADD config/environments/production.rb /opt/feedbin/config/environments/production.rb
-
 ADD startup.sh /feedbin-start
 
 CMD ["/bin/bash", "/feedbin-start"]
