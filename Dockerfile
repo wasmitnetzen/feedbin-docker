@@ -20,22 +20,7 @@ RUN \
     cd /opt/feedbin ;\
     bundle
 
-ARG POSTGRES_URL=192.168.0.180:5432
-ARG ELASTICSEARCH_URL=http://192.168.0.180:9200
-ARG MEMCACHED_HOSTS=192.168.0.180:11211
-ARG POSTGRES_PASSWORD=feedbin
-ARG POSTGRES_USERNAME=feedbin
-ARG RACK_ENV=production
-ARG RAILS_ENV=production
-ARG REDIS_URL=redis://192.168.0.180:6379
-ARG SECRET_KEY_BASE=insertsecret
-ARG DATABASE_URL=postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_URL}/feedbin_production
-
 ADD config/environments/production.rb /opt/feedbin/config/environments/production.rb
-
-RUN \
-    cd /opt/feedbin ;\
-    rake db:drop && rake db:setup
 
 ADD startup.sh /feedbin-start
 
