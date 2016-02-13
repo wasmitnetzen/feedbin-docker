@@ -5,4 +5,4 @@ PATH=$PATH:$GEM_HOME
 
 cd /opt/feedbin
 bundle exec foreman start &
-rackup -o 0.0.0.0
+rackup -o 0.0.0.0 -p 80

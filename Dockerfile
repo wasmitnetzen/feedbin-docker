@@ -41,4 +41,5 @@ ADD startup.sh /feedbin-start
 
 CMD ["/bin/bash", "/feedbin-start"]
 
+EXPOSE 80
 EXPOSE 9292
