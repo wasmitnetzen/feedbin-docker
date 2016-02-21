@@ -1,0 +1,59 @@
+memcached:
+  ports:
+  - 11211:11211/tcp
+  image: memcached:latest
+redis:
+  ports:
+  - 6379:6379/tcp
+  command:
+  - redis-server --appendonly yes
+  image: redis:latest
+  volumes:
+  - /volumes/redis:/data
+feedbin:
+  ports:
+  - 9292:9292/tcp
+  environment:
+    AWS_ACCESS_KEY_ID: **changeme**
+    AWS_S3_BUCKET: **changeme**
+    AWS_SECRET_ACCESS_KEY: **changeme**
+    CAMO_HOST: **changeme**
+    CAMO_KEY: **changeme**
+    DATABASE_URL: postgres://feedbin:feedbin@postgres/feedbin_production
+    DEFAULT_URL_OPTIONS_HOST: **changeme**
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+    FROM_ADDRESS: **changeme**
+    MEMCACHED_HOSTS: memcached:11211
+    POSTGRES_PASSWORD: feedbin
+    POSTGRES_USERNAME: feedbin
+    POSTGRES: postgres
+    PUSH_URL: http://**changeme**
+    RACK_ENV: production
+    RAILS_ENV: production
+    REDIS_URL: redis://redis:6379
+    SMTP_ADDRESS: **changeme**
+    SMTP_PASSWORD: **changeme**
+    SMTP_USERNAME: **changeme**
+  image: scavone/feedbin:latest
+  links:
+  - redis:redis
+  - postgres:postgres
+  - elasticsearch:elasticsearch
+  - memcached:memcached
+postgres:
+  ports:
+  - 5432:5432/tcp
+  environment:
+    POSTGRES_PASSWORD: feedbin
+    POSTGRES_USER: feedbin
+  image: postgres:latest
+feedbin-refresher:
+  environment:
+    REDIS_URL: redis://redis:6379
+  image: scavone/feedbin-refresher:latest
+  links:
+  - redis:redis
+elasticsearch:
+  ports:
+  - 9200:9200/tcp
+  image: munkyboy/elasticsearch:latest
