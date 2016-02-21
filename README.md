@@ -11,8 +11,9 @@ Feedbin dockerized
 
 #Instructions
 
-Follow the following instruction to run the project in production mode:
+The quickest deployment is with Docker Cloud. You can also clone this repository and run `docker-compose up'.
 
-Add your environment variables to the docker-compose.yml file. 
+Ensure you review and populate all of the environment variables.
 
-Run `docker-compose up'
+After the initial deployment, enter a terminal session within the "feedbin" container and execute `cd /opt/feedbin && rake db:setup` which sets up the Postgres database for first time usage.
+
