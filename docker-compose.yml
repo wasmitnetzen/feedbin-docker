@@ -5,8 +5,7 @@ memcached:
 redis:
   ports:
   - 6379:6379/tcp
-  command:
-  - redis-server --appendonly yes
+  command: "redis-server --appendonly yes"
   image: redis:latest
   volumes:
   - /volumes/redis:/data
