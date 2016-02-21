@@ -46,6 +46,8 @@ postgres:
     POSTGRES_PASSWORD: feedbin
     POSTGRES_USER: feedbin
   image: postgres:latest
+  volumes:
+    - /volumes/postgres:/var/lib/postgresql/data
 feedbin-refresher:
   environment:
     REDIS_URL: redis://redis:6379
@@ -56,3 +58,5 @@ elasticsearch:
   ports:
   - 9200:9200/tcp
   image: munkyboy/elasticsearch:latest
+  volumes:
+    - /volumes/elasticsearch:/usr/share/elasticsearch/data
